@@ -1,9 +1,10 @@
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import { useAuthStore } from "../../store/auth-store";
-import { authService } from "../../services/auth-service";
 import { Input } from "@/common/components/input/input";
 import { Button } from "@/common/components/button/button";
+import { authService } from "@/features/auth/services/auth-service";
+import { useAuthStore } from "@/features/auth/store/auth-store";
+
 
 export const LoginPage = () => {
   const {
@@ -16,7 +17,7 @@ export const LoginPage = () => {
 
   const onSubmit = async (formData) => {
     try {
-      const userData = await authService.login(formData);      
+      const userData = await authService.login(formData);
       setAuth(userData);
       navigate(userData.role === "ADMIN" ? "/admin/users" : "/shipping");
     } catch (error) {
@@ -26,19 +27,32 @@ export const LoginPage = () => {
   };
 
   return (
-    <div className="max-w-md mx-auto mt-10 p-6 bg-white shadow-lg rounded-lg">
-      <h2 className="text-2xl font-bold mb-6 text-center">Iniciar Sesión</h2>
-      <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-        <Input label="Correo" name="email" register={register} required />
-        <Input
-          label="Contraseña"
-          name="password"
-          type="password"
-          register={register}
-          required
-        />
-        <Button type="submit">Entrar</Button>
-      </form>
+    <div className="min-h-screen flex items-center justify-center bg-slate-50 p-4">
+      <div className="w-full max-w-sm bg-white p-8 rounded-2xl shadow-xl shadow-slate-200/50 border border-slate-100">
+        <h1 className="text-2xl font-bold text-slate-900 mb-2">Bienvenido</h1>
+        <p className="text-slate-500 mb-8 text-sm">
+          Ingresa tus credenciales para continuar.
+        </p>
+
+        <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-5">
+          <Input
+            label="Correo"
+            name="email"
+            register={register}
+            required
+            error={"No se ingreso el correo"}
+          />
+          <Input
+            label="Contraseña"
+            name="password"
+            type="password"
+            register={register}
+            required
+            error={"No se ingreso la contraseña"}
+          />
+          <Button type="submit">Entrar</Button>
+        </form>
+      </div>
     </div>
   );
 };

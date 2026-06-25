@@ -1,22 +1,11 @@
-export const Button = ({
-  children,
-  isLoading,
-  variant = "primary",
-  ...rest
-}) => {
-  const baseStyle = "w-full py-2 px-4 rounded-lg font-semibold transition-all";
-  const variants = {
-    primary: "bg-blue-600 text-white hover:bg-blue-700",
-    secondary: "bg-slate-200 text-slate-800 hover:bg-slate-300",
-  };
-
+export const Button = ({ children, isLoading, ...rest }) => {
   return (
     <button
       {...rest}
       disabled={isLoading}
-      className={`${baseStyle} ${variants[variant]} ${isLoading ? "opacity-50 cursor-not-allowed" : ""}`}
+      className="w-full py-3 px-4 rounded-xl font-semibold text-white bg-sky-600 hover:bg-sky-700 active:scale-[0.98] transition-all shadow-md shadow-sky-500/20 focus:ring-4 focus:ring-sky-500/30"
     >
-      {isLoading ? "Cargando..." : children}
+      {isLoading ? "Procesando..." : children}
     </button>
   );
 };

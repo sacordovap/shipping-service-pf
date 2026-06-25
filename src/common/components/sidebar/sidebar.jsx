@@ -1,5 +1,10 @@
 import { NavLink } from "react-router-dom";
-import { LogOut, Package2, Users2Icon, LayoutDashboardIcon } from "lucide-react";
+import {
+  LogOut,
+  Package2,
+  Users2Icon,
+  LayoutDashboardIcon,
+} from "lucide-react";
 import { useAuthStore } from "@/features/auth/store/auth-store";
 
 export const Sidebar = ({ onClose }) => {
@@ -19,43 +24,46 @@ export const Sidebar = ({ onClose }) => {
     },
     {
       name: "Inventario",
-      path: "/admin/products",
+      path: "/register",
       icon: <Package2 />,
       roles: ["ADMIN", "OPERADOR"],
     },
   ];
 
   return (
-    <aside className="w-64 h-screen bg-sidebar text-white flex flex-col p-4">
-      <h1 className="text-xl font-bold mb-8 px-2">Shipping Service</h1>
+    <aside className="w-64 h-screen bg-[#0f172a] text-slate-300 flex flex-col p-4 shadow-xl">
+      <h1 className="text-xl font-bold text-white mb-8 px-2 tracking-tight">
+        Shipping Service
+      </h1>
 
-      <nav className="flex-1 space-y-2">
+      <nav className="flex-1 space-y-1">
         {menuItems
-          .filter((item) => item.roles.includes(role)) 
+          .filter((item) => item.roles.includes(role))
           .map((item) => (
             <NavLink
               key={item.path}
               to={item.path}
               onClick={onClose}
               className={({ isActive }) =>
-                `flex items-center gap-3 p-3 rounded-lg transition-all ${
+                `flex items-center gap-3 p-3 rounded-xl transition-all duration-200 ${
                   isActive
-                    ? "bg-primary text-white shadow-lg"
-                    : "hover:bg-white/10"
+                    ? "bg-[#0284c7] text-white shadow-lg shadow-[#0284c7]/20"
+                    : "hover:bg-white/5 hover:text-white"
                 }`
               }
             >
-              {item.icon}
-              {item.name}
+              {/* Aumentamos un poco el tamaño del icono */}
+              <span className="opacity-80">{item.icon}</span>
+              <span className="font-medium">{item.name}</span>
             </NavLink>
           ))}
       </nav>
 
       <button
         onClick={logout}
-        className="flex items-center gap-3 p-3 text-red-300 hover:text-red-100"
+        className="flex items-center gap-3 p-3 text-rose-400 hover:text-rose-300 hover:bg-rose-500/10 rounded-xl transition-colors"
       >
-        <LogOut size={20} /> Salir
+        <LogOut size={20} /> <span className="font-medium">Salir</span>
       </button>
     </aside>
   );

@@ -1,5 +1,5 @@
 import * as z from "zod";
-/*Usando el fortamo de mi back*/
+/*Usando el formato de mi back*/
 export const registerSchema = z
   .object({
     nombre: z.string().min(15, "Mínimo 15 caracteres"),

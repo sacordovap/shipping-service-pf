@@ -1,3 +1,4 @@
+import { UserCard } from "../../../../common/components/card/user-card";
 import { RoleBadge } from "../../components/badge/badge";
 import { StatusUser } from "../../components/badge/status-user";
 import { useUsers } from "../../hooks/useUser";
@@ -23,7 +24,13 @@ export const AdminUserListPage = () => {
         Gestión de Usuarios
       </h2>
 
-      <div className="overflow-x-auto bg-white rounded-xl shadow-sm border border-border">
+      <div className="md:hidden">
+        {users.map((user) => (
+          <UserCard key={user.username} user={user} />
+        ))}
+      </div>
+
+      <div className="hidden md:block overflow-x-auto bg-white rounded-xl border border-border">
         <table className="w-full text-left">
           <thead className="bg-slate-50 border-b border-border">
             <tr>

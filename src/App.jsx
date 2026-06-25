@@ -1,8 +1,11 @@
 import { RouterProvider } from "react-router-dom";
 import { router } from "./app/router/app-router";
-
-import "./common/styles/global.css";
+import { SessionChecker } from "@/common/layouts/checker/session-checker";
 
 export default function App() {
-  return <RouterProvider router={router} />;
+  return (
+    <SessionChecker>
+      <RouterProvider router={router} />
+    </SessionChecker>
+  );
 }

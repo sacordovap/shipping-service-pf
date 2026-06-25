@@ -16,6 +16,7 @@ export const useAuthStore = create(
         }
 
         localStorage.setItem("token", userData.token);
+        localStorage.setItem("loginTime", Date.now().toString());
         set({
           user: userData.username,
           role: userData.role,
@@ -27,6 +28,7 @@ export const useAuthStore = create(
       logout: () => {
         localStorage.removeItem("token");
         set({ user: null, role: null, isAuthenticated: false });
+        
       },
     }),
     { name: "auth-storage" },

@@ -1,5 +1,4 @@
-import { api } from "../../../common/services/api";
-
+import { api } from "@/common/services/api";
 
 export const authService = {
   login: async (credentials) => {
