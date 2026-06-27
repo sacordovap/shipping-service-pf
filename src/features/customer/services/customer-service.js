@@ -4,8 +4,8 @@ export const customerService = {
   // Crear cliente
   create: async (data) => {
     try {
-      const response = await api.post(data);
-      return response.data; 
+      const response = await api.post("/customers", data);
+      return response.data.data;
     } catch (error) {
       throw error.response?.data || { message: "Error al registrar cliente" };
     }
@@ -14,8 +14,8 @@ export const customerService = {
   // Obtener por ID
   getById: async (id) => {
     try {
-      const response = await api.get(`/${id}`);
-      return response.data;
+      const response = await api.get(`/customers/${id}`);
+      return response.data.data;
     } catch (error) {
       throw error.response?.data || { message: "Error al obtener cliente" };
     }
@@ -24,8 +24,8 @@ export const customerService = {
   // Obtener por DNI
   getByDni: async (dni) => {
     try {
-      const response = await api.get(`/dni/${dni}`);
-      return response.data;
+      const response = await api.get(`/customers/dni/${dni}`);
+      return response.data.data;
     } catch (error) {
       throw (
         error.response?.data || { message: "Error al buscar cliente por DNI" }
@@ -36,8 +36,8 @@ export const customerService = {
   // Listar todos
   getAll: async () => {
     try {
-      const response = await api.get();
-      return response.data;
+      const response = await api.get("/customers");
+      return response.data.data;
     } catch (error) {
       throw (
         error.response?.data || {
@@ -50,8 +50,8 @@ export const customerService = {
   // Actualizar
   update: async (id, data) => {
     try {
-      const response = await api.put(`/${id}`, data);
-      return response.data;
+      const response = await api.put(`/customers/${id}`, data);
+      return response.data.data;
     } catch (error) {
       throw error.response?.data || { message: "Error al actualizar cliente" };
     }
@@ -60,8 +60,8 @@ export const customerService = {
   // Eliminar (Deshabilitar)
   delete: async (id) => {
     try {
-      const response = await api.delete(`/${id}`);
-      return response.data;
+      const response = await api.delete(`/customers/${id}`);
+      return response.data.data;
     } catch (error) {
       throw (
         error.response?.data || { message: "Error al deshabilitar cliente" }
@@ -72,8 +72,8 @@ export const customerService = {
   // Reactivar
   reactivate: async (id) => {
     try {
-      const response = await api.patch(`/${id}/activate`);
-      return response.data;
+      const response = await api.patch(`/customers/${id}/activate`);
+      return response.data.data;
     } catch (error) {
       throw error.response?.data || { message: "Error al reactivar cliente" };
     }

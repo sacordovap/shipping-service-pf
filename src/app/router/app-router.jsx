@@ -2,25 +2,35 @@ import { createBrowserRouter } from "react-router-dom";
 import { MainLayout } from "@/common/layouts/main-layout";
 import { ProtectedRoute } from "@/features/auth/components/protected-route";
 import { AdminUserListPage } from "@/features/auth/pages/list/user-list-page";
-import { Register } from "../page/auth/register/auth";
-import { Auth } from "../page/auth/auth";
-import { UnauthtorizedRoute } from "../page/auth/unauthorized";
+import { RegisterCustomer } from "@/app/page/customer/register/register-customer";
+import { AuthLogin } from "@/app/page/auth/auth-login";
+import { AuthRegister } from "@/app/page/auth/register/auth-register";
+import { ListUsers } from "@/app/page/auth/list-user/list-user";
+import { UnauthtorizedRoute } from "@/app/page/auth/unauthorized";
+import { ListCustomer } from "@/app/page/customer/list-customer/list-customer";
 
 export const router = createBrowserRouter([
-  { path: "/login", Component: Auth },
-  { path: "/register", Component: Register },
+  { path: "/login", Component: AuthLogin },
+  { path: "/register", Component: AuthRegister },
   { path: "/unauthorized", Component: UnauthtorizedRoute },
 
   {
-    path: "/admin",
-    element: <ProtectedRoute allowedRoles={["ADMIN"]} />,
+    path: "/shipping",
+    element: <ProtectedRoute allowedRoles={["ADMIN", "OPERADOR"]} />,
     children: [
       {
-        element: <MainLayout />, 
+        element: <MainLayout />,
         children: [
-          { path: "list-users", Component: AdminUserListPage },
           { path: "dashboard", Component: AdminUserListPage },
-          { path: "customer-service", Component: AdminUserListPage }, 
+          { path: "customer", Component: RegisterCustomer },
+          {
+            element: <ProtectedRoute allowedRoles={["ADMIN"]} />,
+            children: [
+              { path: "list-users", Component: ListUsers },
+              { path: "register", Component: AuthRegister },
+              { path: "list-customers", Component: ListCustomer },
+            ],
+          },
         ],
       },
     ],

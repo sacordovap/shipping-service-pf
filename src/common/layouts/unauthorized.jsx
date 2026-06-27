@@ -1,4 +1,4 @@
-export default function UnauthtorizedRoute() {
+export default function Unauthtorized() {
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-slate-50 p-4 text-center">
       <div className="bg-white p-8 rounded-2xl shadow-sm border border-slate-200 max-w-md w-full">

@@ -2,6 +2,6 @@
 import { RegisterPage } from "@/features/auth/pages/register/register-page";
 
 
-export function Register() {
+export function AuthRegister() {
   return <RegisterPage />;
 }

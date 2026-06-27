@@ -1,4 +1,3 @@
-// src/components/auth/SessionChecker.jsx
 import { useEffect } from "react";
 import { useAuthStore } from "@/features/auth/store/auth-store";
 

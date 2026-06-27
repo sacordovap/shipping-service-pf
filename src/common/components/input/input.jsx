@@ -3,6 +3,7 @@ export const Input = ({
   name,
   error,
   register,
+  readOnly,
   type = "text",
   ...props
 }) => {
@@ -13,6 +14,7 @@ export const Input = ({
         {...register(name)}
         type={type}
         {...props}
+        readOnly={readOnly}
         className={`w-full py-3 px-4 text-base rounded-xl border bg-slate-50 outline-none transition-all duration-200
           ${
             error

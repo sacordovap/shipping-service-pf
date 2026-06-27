@@ -12,7 +12,11 @@ export const useCustomer = (asyncFn) => {
       return result;
     } catch (err) {
       const message =
-        err.response?.data?.message || "Ocurrió un error inesperado";
+        err.response?.data?.message ||
+        err.response?.data ||
+        err.message ||
+        "Ocurrió un error inesperado";
+
       setError(message);
       throw new Error(message);
     } finally {

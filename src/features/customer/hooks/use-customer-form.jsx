@@ -1,6 +1,8 @@
 import { useForm, useFieldArray } from "react-hook-form";
-import { customerService } from "../services/customer-service";
 import { useCustomer } from "@/features/customer/hooks/use-customer";
+import { customerSchema } from "@/features/customer/schemas/customer-schema";
+import { customerService } from "@/features/customer/services/customer-service";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 export const useCustomerForm = () => {
   const { execute: createCustomer, isLoading: isSaving } = useCustomer(
@@ -8,6 +10,8 @@ export const useCustomerForm = () => {
   );
 
   const methods = useForm({
+    resolver: zodResolver(customerSchema),
+    mode: "onChange",
     defaultValues: {
       dni: "",
       email: "",
@@ -22,11 +26,14 @@ export const useCustomerForm = () => {
   });
 
   const onSubmit = async (data) => {
+    console.log(data);
     try {
       await createCustomer(data);
       methods.reset();
+      alert("¡Cliente registrado con éxito!");
     } catch (error) {
-      methods.setError("email", { message: error.message });
+      methods.setError("error", { message: error.message });
+      alert(error.message);
     }
   };
 
