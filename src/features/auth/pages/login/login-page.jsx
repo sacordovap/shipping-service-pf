@@ -19,7 +19,7 @@ export const LoginPage = () => {
     try {
       const userData = await authService.login(formData);
       setAuth(userData);
-      navigate(userData.role === "ADMIN" ? "/admin/users" : "/shipping");
+      navigate("/shipping/dashboard");
     } catch (error) {
       console.error("Error completo:", error);
       alert("Error al iniciar sesión");

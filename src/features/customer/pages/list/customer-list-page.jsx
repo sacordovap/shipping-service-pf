@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Edit, Trash2 } from "lucide-react";
+import { Edit, ListRestart, Trash2, UserLock, UserRoundCog, UserRoundPen } from "lucide-react";
 import { useAuthStore } from "@/features/auth/store/auth-store";
 import { StatusCustomer } from "@/features/customer/components/badge/status-customer";
 import { useListCustomers } from "@/features/customer/hooks/use-list-customer";
@@ -8,8 +8,14 @@ import { EditCustomerModal } from "@/features/customer/pages/list/modal-edit/edi
 export const CustomerListPage = () => {
   const [editingCustomer, setEditingCustomer] = useState(null);
 
-  const { customers, isLoading, error, handleEdit, handleDelete } =
-    useListCustomers();
+  const {
+    customers,
+    isLoading,
+    error,
+    handleEdit,
+    handleActivate,
+    handleDelete,
+  } = useListCustomers();
   const { role } = useAuthStore();
 
   const handleSaveEdit = async (data) => {
@@ -45,19 +51,27 @@ export const CustomerListPage = () => {
               <StatusCustomer status={c.active} />
             </div>
             <div className="flex items-center gap-2">
+              {role === "ADMIN" && !c.active && (
+                <button
+                  onClick={() => handleActivate(c.id)}
+                  className="p-2 text-yellow-500 hover:bg-rose-50 rounded-lg"
+                >
+                  <UserRoundCog size={30} />
+                </button>
+              )}
               {role === "ADMIN" && (
                 <button
                   onClick={() => handleDelete(c.id)}
                   className="p-2 text-rose-500 hover:bg-rose-50 rounded-lg"
                 >
-                  <Trash2 size={30} />
+                  <UserLock size={30} />
                 </button>
               )}
               <button
                 onClick={() => setEditingCustomer(c)}
                 className="p-2 text-sky-600 hover:bg-sky-50 rounded-lg"
               >
-                <Edit size={30} />
+                <UserRoundPen size={30} />
               </button>
             </div>
           </div>

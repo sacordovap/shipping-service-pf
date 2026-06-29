@@ -26,14 +26,22 @@ export const useListCustomers = () => {
   const handleDelete = async (id) => {
     if (confirm("¿Estás seguro?")) {
       await customerService.delete(id);
-      fetchCustomers();
+      await fetchCustomers();
     }
   };
 
   const handleEdit = async (id, data) => {
-    console.log(id)
+    console.log(id);
     if (confirm("Editando")) {
       await customerService.update(id, data);
+      await fetchCustomers();
+    }
+  };
+
+  const handleActivate = async (id) => {
+    console.log(id);
+    if (confirm("Activar Cliente")) {
+      await customerService.reactivate(id);
       await fetchCustomers();
     }
   };
@@ -44,6 +52,7 @@ export const useListCustomers = () => {
     error,
     handleEdit,
     handleDelete,
+    handleActivate,
     fetchCustomers,
   };
 };

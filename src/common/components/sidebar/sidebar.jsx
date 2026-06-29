@@ -25,12 +25,12 @@ export const Sidebar = ({ onClose }) => {
     }`;
 
   return (
-    <aside className="w-64 h-screen bg-[#0f172a] text-slate-300 flex flex-col p-4 shadow-xl select-none">
+    <aside className="w-full h-screen bg-[#0f172a] text-slate-300 flex flex-col p-4 shadow-xl select-none">
       <h1 className="text-xl font-bold text-white mb-8 px-2 tracking-tight">
         Shipping Service
       </h1>
 
-      <nav className="flex-1 space-y-1 overflow-y-auto">
+      <nav className="flex-1 space-y-1 overflow-y-auto pr-2 custom-scrollbar">
         {MENU_ITEMS.filter((item) => item.roles.includes(role)).map((item) => {
           const Icon = item.icon;
           const hasChildren = item.children && item.children.length > 0;

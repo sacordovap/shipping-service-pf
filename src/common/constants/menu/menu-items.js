@@ -15,7 +15,7 @@ export const MENU_ITEMS = [
   {
     name: "Usuarios",
     icon: UserCheck,
-    roles: ["ADMIN"], 
+    roles: ["ADMIN"],
     children: [
       {
         name: "Lista de Usuarios",
@@ -36,20 +36,31 @@ export const MENU_ITEMS = [
     children: [
       {
         name: "Registrar Cliente",
-        path: "/shipping/customer",
+        path: "/shipping/reg-customer",
         roles: ["ADMIN"],
       },
       {
         name: "Lista de clientes",
         path: "/shipping/list-customers",
-        roles: ["ADMIN","OPERADOR"],
+        roles: ["ADMIN", "OPERADOR"],
       },
     ],
   },
   {
-    name: "Inventario",
-    path: "/register",
+    name: "Envios",
     icon: Package2,
-    roles: ["ADMIN", "OPERADOR"],
+    roles: ["ADMIN", "OPERADOR", "CLIENTE"],
+    children: [
+      {
+        name: "Mis Envíos",
+        path: "/shipping/dashboard",
+        roles: ["ADMIN", "OPERADOR", "CLIENTE"],
+      },
+      {
+        name: "Lista de Envios",
+        path: "/shipping/dashboard",
+        roles: ["ADMIN", "OPERADOR"],
+      },
+    ],
   },
 ];

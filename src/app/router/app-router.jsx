@@ -21,14 +21,16 @@ export const router = createBrowserRouter([
       {
         element: <MainLayout />,
         children: [
-          //TODOS MIS ROLES
+          //TODOS MIS ROL
           { path: "dashboard", Component: AdminUserListPage },
 
           //OPE Y ADMIN
           {
             element: <ProtectedRoute allowedRoles={["ADMIN", "OPERADOR"]} />,
-            children: [{ path: "list-customers", Component: ListCustomer }],
-            
+            children: [
+              { path: "reg-customer", Component: RegisterCustomer },
+              { path: "list-customers", Component: ListCustomer },
+            ],
           },
 
           //SOLO ADMIN

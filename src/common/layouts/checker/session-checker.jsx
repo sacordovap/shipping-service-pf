@@ -1,20 +1,25 @@
-import { useEffect } from "react";
 import { useAuthStore } from "@/features/auth/store/auth-store";
+import { jwtDecode } from "jwt-decode";
+import { useEffect } from "react";
 
 export const SessionChecker = ({ children }) => {
   const { logout } = useAuthStore();
 
   useEffect(() => {
     const checkSession = () => {
-      const loginTime = localStorage.getItem("loginTime");
-      if (loginTime) {
-        const hourInMs = 60 * 60 * 1000;
-        if (Date.now() - parseInt(loginTime) > hourInMs) {
-          logout();
-          window.location.href = "/login";
-        }
+      const token = localStorage.getItem("token");
+      if (!token) return;
+
+      const decoded = jwtDecode(token);
+      const isExpired = decoded.exp * 1000 < Date.now(); // JWT
+
+      if (isExpired) {
+        logout();
+        window.location.href = "/login";
       }
     };
+
+    checkSession();
     const interval = setInterval(checkSession, 60000);
     return () => clearInterval(interval);
   }, [logout]);

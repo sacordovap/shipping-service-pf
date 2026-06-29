@@ -1,6 +1,6 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
-
+import { jwtDecode } from "jwt-decode";
 export const useAuthStore = create(
   persist(
     (set) => ({
@@ -14,24 +14,20 @@ export const useAuthStore = create(
           console.error("Error: userData está malformado", userData);
           return;
         }
-
+        console.log(userData);
+        const decoded = jwtDecode(userData.token);
         localStorage.setItem("token", userData.token);
-        localStorage.setItem("loginTime", Date.now().toString());
         set({
-          user: userData.username,
-          role: userData.role,
-          email: userData.email,
+          user: decoded.username,
+          role: decoded.role,
+          email: decoded.sub,
           isAuthenticated: true,
         });
       },
 
       logout: () => {
         localStorage.removeItem("token");
-        set({ email:null, user: null, role: null, isAuthenticated: false });
-        localStorage.removeItem("auth-storage")
-        localStorage.removeItem("loginTime")
-        
-        
+        set({ user: null, role: null, email: null, isAuthenticated: false });
       },
     }),
     { name: "auth-storage" },

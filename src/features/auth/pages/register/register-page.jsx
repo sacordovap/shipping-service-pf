@@ -27,6 +27,7 @@ export const RegisterPage = () => {
     try {
       await authService.register(dataToSubmit);
       alert("Usuario registrado con éxito");
+      navigate("/login");
     } catch (error) {
       alert("Error al registrar: " + (error.message || "Intenta de nuevo"));
     }

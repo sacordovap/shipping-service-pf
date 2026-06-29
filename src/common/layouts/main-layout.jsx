@@ -8,14 +8,14 @@ export const MainLayout = () => {
   const { isSidebarOpen, toggleSidebar, closeSidebar } = useSidebar();
 
   return (
-    <div className="flex min-h-screen bg-gray-50">
+    <div className="flex h-screen w-screen overflow-hidden bg-gray-50">
       <SidebarWrapper isOpen={isSidebarOpen} onClose={closeSidebar}>
         <Sidebar onClose={closeSidebar} />
       </SidebarWrapper>
 
-      <div className="flex-1 flex flex-col min-w-0">
+      <div className="flex-1 flex flex-col h-full overflow-y-auto">
         <Navbar onToggle={toggleSidebar} />
-        <main className="p-8">
+        <main className="p-3">
           <Outlet />
         </main>
       </div>
