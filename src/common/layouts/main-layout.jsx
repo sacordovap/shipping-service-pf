@@ -13,9 +13,9 @@ export const MainLayout = () => {
         <Sidebar onClose={closeSidebar} />
       </SidebarWrapper>
 
-      <div className="flex-1 flex flex-col h-full overflow-y-auto">
+      <div className="flex-1 flex flex-col h-full overflow-hidden">
         <Navbar onToggle={toggleSidebar} />
-        <main className="p-3">
+        <main className="flex-1 overflow-y-auto p-2">
           <Outlet />
         </main>
       </div>

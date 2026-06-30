@@ -10,17 +10,22 @@ export const SessionChecker = ({ children }) => {
       const token = localStorage.getItem("token");
       if (!token) return;
 
-      const decoded = jwtDecode(token);
-      const isExpired = decoded.exp * 1000 < Date.now(); // JWT
+      try {
+        const decoded = jwtDecode(token);
+        const isExpired = decoded.exp * 1000 < Date.now(); // JWT
 
-      if (isExpired) {
+        if (isExpired) {
+          logout();
+          window.location.href = "/login";
+        }
+      } catch (error) {
         logout();
         window.location.href = "/login";
       }
     };
 
     checkSession();
-    const interval = setInterval(checkSession, 60000);
+    const interval = setInterval(checkSession, 30000);
     return () => clearInterval(interval);
   }, [logout]);
 

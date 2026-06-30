@@ -8,6 +8,7 @@ import { AuthRegister } from "@/app/page/auth/register/auth-register";
 import { ListUsers } from "@/app/page/auth/list-user/list-user";
 import { UnauthtorizedRoute } from "@/app/page/auth/unauthorized";
 import { ListCustomer } from "@/app/page/customer/list-customer/list-customer";
+import { ShippingList } from "@/app/page/shipping/list-shipping/shipping-list";
 
 export const router = createBrowserRouter([
   { path: "/login", Component: AuthLogin },
@@ -30,6 +31,7 @@ export const router = createBrowserRouter([
             children: [
               { path: "reg-customer", Component: RegisterCustomer },
               { path: "list-customers", Component: ListCustomer },
+              { path: "shipping-list", Component: ShippingList },
             ],
           },
 
