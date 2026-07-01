@@ -7,12 +7,13 @@ export const SessionChecker = ({ children }) => {
 
   useEffect(() => {
     const checkSession = () => {
-      const token = localStorage.getItem("token");
+      const token = useAuthStore.getState().token;
+      // const token = localStorage.getItem("token");
       if (!token) return;
 
       try {
         const decoded = jwtDecode(token);
-        const isExpired = decoded.exp * 1000 < Date.now(); // JWT
+        const isExpired = decoded.exp * 1000 < Date.now();
 
         if (isExpired) {
           logout();

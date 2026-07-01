@@ -9,6 +9,8 @@ import { ListUsers } from "@/app/page/auth/list-user/list-user";
 import { UnauthtorizedRoute } from "@/app/page/auth/unauthorized";
 import { ListCustomer } from "@/app/page/customer/list-customer/list-customer";
 import { ShippingList } from "@/app/page/shipping/list-shipping/shipping-list";
+import { ShippingDetail } from "@/app/page/shipping/shipping/shipping-detail-page";
+import { ShippingDashboard } from "@/app/page/shipping/dashboard/shipping-dashboard";
 
 export const router = createBrowserRouter([
   { path: "/login", Component: AuthLogin },
@@ -23,7 +25,10 @@ export const router = createBrowserRouter([
         element: <MainLayout />,
         children: [
           //TODOS MIS ROL
-          { path: "dashboard", Component: AdminUserListPage },
+          { path: "dashboard", Component: ShippingDashboard },
+          { path: "detail/:id", Component: ShippingDetail },
+          { path: "my-shipping", Component: ShippingList },
+          
 
           //OPE Y ADMIN
           {
@@ -41,7 +46,7 @@ export const router = createBrowserRouter([
             children: [
               { path: "list-users", Component: AdminUserListPage },
               { path: "register", Component: AuthRegister },
-              { path: "list-customers", Component: ListCustomer },
+              // { path: "list-customers", Component: ListCustomer },
             ],
           },
         ],

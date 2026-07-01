@@ -10,8 +10,7 @@ export const shippingService = {
     handleApiCall(api.get(`/shippings/filter?branch=${branch}&state=${state}`)),
 
   //TODOS LOS ENVIOS
-  //TODO: change to getAll
-  getAll: async () => handleApiCall(api.get(`/shippings/search?term=T`)),
+  getAll: async () => handleApiCall(api.get("/shippings")),
   // const response = await api.get();
 
   // Listado filtrado (CATEGORY + STATE)

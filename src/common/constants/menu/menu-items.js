@@ -10,7 +10,7 @@ export const MENU_ITEMS = [
     name: "Dashboard",
     path: "/shipping/dashboard",
     icon: LayoutDashboardIcon,
-    roles: ["ADMIN"],
+    roles: ["ADMIN", "OPERADOR", "CLIENTE"],
   },
   {
     name: "Usuarios",
@@ -53,7 +53,7 @@ export const MENU_ITEMS = [
     children: [
       {
         name: "Mis Envíos",
-        path: "/shipping/dashboard",
+        path: "/shipping/my-shipping",
         roles: ["ADMIN", "OPERADOR", "CLIENTE"],
       },
       {
