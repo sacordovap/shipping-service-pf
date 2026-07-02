@@ -4,6 +4,7 @@ import { usePermissions } from "@/hooks/use-pemission";
 import { StatusBadge } from "@/features/shipping/components/badge/status-badge";
 import { ShippingActions } from "@/features/shipping/components/actions/shipping-actions";
 import { Package, User, MapPin, DollarSign, Scale, Tag } from "lucide-react";
+import { ShippingStepper } from "@/features/shipping/components/stepper/shipping-stepper";
 
 export const ShippingDetailPage = () => {
   const { id } = useParams();
@@ -20,7 +21,7 @@ export const ShippingDetailPage = () => {
     );
 
   return (
-    <div className="p-6 max-w-5xl mx-auto space-y-6">
+    <div className="p-6 max-w-7xl mx-auto space-y-6">
       <div className="flex-1 justify-evenly items-center bg-white p-6 rounded-2xl border border-slate-200 shadow-sm ">
         <div>
           <p className="text-sm text-slate-400 font-medium">Envío N°</p>
@@ -29,7 +30,8 @@ export const ShippingDetailPage = () => {
             {shipping.tracking}
           </h1>
         </div>
-        <StatusBadge status={shipping.status} />
+        <ShippingStepper currentStatus={shipping.status} />
+        {/* <StatusBadge status={shipping.status} /> */}
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">

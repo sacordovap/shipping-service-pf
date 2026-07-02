@@ -11,6 +11,7 @@ import { ListCustomer } from "@/app/page/customer/list-customer/list-customer";
 import { ShippingList } from "@/app/page/shipping/list-shipping/shipping-list";
 import { ShippingDetail } from "@/app/page/shipping/shipping/shipping-detail-page";
 import { ShippingDashboard } from "@/app/page/shipping/dashboard/shipping-dashboard";
+import { ShippingRegister } from "@/app/page/shipping/register/shipping-register";
 
 export const router = createBrowserRouter([
   { path: "/login", Component: AuthLogin },
@@ -28,6 +29,7 @@ export const router = createBrowserRouter([
           { path: "dashboard", Component: ShippingDashboard },
           { path: "detail/:id", Component: ShippingDetail },
           { path: "my-shipping", Component: ShippingList },
+          { path: "reg-shipping", Component: ShippingRegister },
           
 
           //OPE Y ADMIN

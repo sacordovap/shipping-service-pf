@@ -52,6 +52,11 @@ export const MENU_ITEMS = [
     roles: ["ADMIN", "OPERADOR", "CLIENTE"],
     children: [
       {
+        name: "Registrar un Envío",
+        path: "/shipping/reg-shipping",
+        roles: ["ADMIN", "OPERADOR", "CLIENTE"],
+      },
+      {
         name: "Mis Envíos",
         path: "/shipping/my-shipping",
         roles: ["ADMIN", "OPERADOR", "CLIENTE"],

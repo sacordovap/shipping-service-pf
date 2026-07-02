@@ -10,9 +10,7 @@ export const useShippingDetail = (id) => {
   useEffect(() => {
     const fetchDetail = async () => {
       try {
-        console.log(id)
-        const data = await shippingService.getById(id);
-        console.log(shipping)
+        const data = await shippingService.getById(id);        
         setShipping(mapShippingToList(data));
         // setShipping(data);
       } catch (err) {

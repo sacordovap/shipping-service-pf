@@ -2,7 +2,7 @@ import * as z from "zod";
 /*Usando el formato de mi back*/
 export const registerSchema = z
   .object({
-    nombre: z.string().min(15, "Mínimo 15 caracteres"),
+    nombre: z.string().min(8, "Mínimo 8 caracteres"),
     email: z.string().email("Formato de correo inválido"),
     username: z.string().min(6, "Mínimo 6 caracteres"),
     password: z
