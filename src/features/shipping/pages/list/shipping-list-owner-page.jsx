@@ -1,14 +1,14 @@
 import { StatusBadge } from "@/features/shipping/components/badge/status-badge";
 import { TrackingBadge } from "@/features/shipping/components/badge/tracking-badge";
 import { CreateShippingDrawer } from "@/features/shipping/components/drawer/create-shipping-drawer";
-import { useListShippings } from "@/features/shipping/hooks/use-list-shipping";
+import { useListOwnerShippings } from "@/features/shipping/hooks/use-list-owner-shipping";
 import { Plus } from "lucide-react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-export const ShippingListPage = () => {
+export const ShippingListOwnerPage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const { shippings, isLoading, error, refetch } = useListShippings();
+  const { shippings, isLoading, error, refetch } = useListOwnerShippings();
   const navigate = useNavigate();
 
   if (isLoading)
@@ -21,7 +21,7 @@ export const ShippingListPage = () => {
       <div className="p-6">
         <div className="flex justify-between items-center mb-8">
           <h2 className="text-2xl font-bold text-slate-800">
-            Envíos Registrados
+            Mis Envíos Registrados
           </h2>
           <button
             onClick={() => setIsModalOpen(true)}

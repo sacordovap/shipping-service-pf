@@ -1,16 +1,17 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useShippingDetail } from "@/features/shipping/hooks/use-shipping-detail";
 import { usePermissions } from "@/hooks/use-pemission";
-import { StatusBadge } from "@/features/shipping/components/badge/status-badge";
+
 import { ShippingActions } from "@/features/shipping/components/actions/shipping-actions";
-import { Package, User, MapPin, DollarSign, Scale, Tag } from "lucide-react";
+import { Package, MapPin, Scale, Tag, ArrowLeft } from "lucide-react";
 import { ShippingStepper } from "@/features/shipping/components/stepper/shipping-stepper";
 
 export const ShippingDetailPage = () => {
+  const navigate = useNavigate();
   const { id } = useParams();
-  const { shipping, isLoading, error } = useShippingDetail(id);
+  const { shipping, isLoading, error, refetch } = useShippingDetail(id);
   const { isAdmin, isOperator } = usePermissions();
-
+  console.log(useParams());
   if (isLoading)
     return (
       <div className="p-10 text-center animate-pulse">Cargando detalles...</div>
@@ -22,6 +23,13 @@ export const ShippingDetailPage = () => {
 
   return (
     <div className="p-6 max-w-7xl mx-auto space-y-6">
+      <button
+        onClick={() => navigate(-1)}
+        className="flex items-center gap-2 text-sm font-medium text-slate-500 hover:text-slate-900 transition-colors mb-4"
+      >
+        <ArrowLeft className="w-4 h-4" />
+        Volver al listado
+      </button>
       <div className="flex-1 justify-evenly items-center bg-white p-6 rounded-2xl border border-slate-200 shadow-sm ">
         <div>
           <p className="text-sm text-slate-400 font-medium">Envío N°</p>
@@ -102,7 +110,9 @@ export const ShippingDetailPage = () => {
             </div>
           </div>
 
-          {(isAdmin || isOperator) && <ShippingActions shipping={shipping} />}
+          {(isAdmin || isOperator) && (
+            <ShippingActions shipping={shipping} onDetailUpdate={refetch} />
+          )}
         </div>
       </div>
     </div>

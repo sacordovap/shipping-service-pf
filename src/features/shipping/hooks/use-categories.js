@@ -1,6 +1,6 @@
 import { categoriesService } from "@/features/shipping/services/categories-service";
 import { useCallback, useEffect, useState } from "react";
-
+ 
 export const useCategories = () => {
   const [categories, setCategories] = useState([]);
   const [isLoading, setIsLoading] = useState(true);

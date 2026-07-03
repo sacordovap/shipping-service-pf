@@ -7,6 +7,7 @@ export const useShippingHistory = () => {
   const [error, setError] = useState(null);
 
   const fetchHistory = async (trackingCode) => {
+    setHistory([]);
     setIsLoading(true);
     try {
       const response = await shippingService.getHistory(trackingCode);

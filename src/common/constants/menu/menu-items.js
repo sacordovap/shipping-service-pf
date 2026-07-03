@@ -13,6 +13,12 @@ export const MENU_ITEMS = [
     roles: ["ADMIN", "OPERADOR", "CLIENTE"],
   },
   {
+    name: "Tracking",
+    path: "/shipping/tracking",
+    icon: LayoutDashboardIcon,
+    roles: ["ADMIN", "OPERADOR", "CLIENTE"],
+  },
+  {
     name: "Usuarios",
     icon: UserCheck,
     roles: ["ADMIN"],
@@ -51,15 +57,15 @@ export const MENU_ITEMS = [
     icon: Package2,
     roles: ["ADMIN", "OPERADOR", "CLIENTE"],
     children: [
-      {
-        name: "Registrar un Envío",
-        path: "/shipping/reg-shipping",
-        roles: ["ADMIN", "OPERADOR", "CLIENTE"],
-      },
+      // {
+      //   name: "Registrar un Envío",
+      //   path: "/shipping/reg-shipping",
+      //   roles: ["ADMIN", "OPERADOR", "CLIENTE"],
+      // },
       {
         name: "Mis Envíos",
-        path: "/shipping/my-shipping",
-        roles: ["ADMIN", "OPERADOR", "CLIENTE"],
+        path: "/shipping/my-shippings",
+        roles: ["ADMIN", "OPERADOR"],
       },
       {
         name: "Lista de Envios",

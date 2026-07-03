@@ -13,14 +13,22 @@ export const shippingService = {
   getAll: async () => handleApiCall(api.get("/shippings")),
   // const response = await api.get();
 
+  getAllOwner: async () => handleApiCall(api.get("/shippings/my-shippings")),
+  // const response = await api.get();
+
+
   // Listado filtrado (CATEGORY + STATE)
   getByCategoryAndState: (category, state) =>
     handleApiCall(
       api.get(`/shippings/filter/category?category=${category}&state=${state}`),
     ),
 
+  // Búsqueda por tracking
+  searchByTracking: (tracking) =>
+    handleApiCall(api.get(`/shippings/tracking/${tracking}`)),
+
   // Búsqueda por término (tracking parcial)
-  searchByTracking: (term) =>
+  searchByTrackingTerm: (term) =>
     handleApiCall(api.get(`/shippings/search?term=${term}`)),
 
   // Búsqueda por nombre
@@ -28,7 +36,7 @@ export const shippingService = {
     handleApiCall(api.get(`/shippings/searchName?name=${name}`)),
 
   // Obtener por ID
-  getById: (id) => handleApiCall(api.get(`/shippings/${id}`)),
+  getById: (id) => handleApiCall(api.get(`/shippings/detail/${id}`)),
 
   // Obtener historial
   getHistory: (trackingNumber) =>

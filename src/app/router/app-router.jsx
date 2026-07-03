@@ -5,13 +5,14 @@ import { AdminUserListPage } from "@/features/auth/pages/list/user-list-page";
 import { RegisterCustomer } from "@/app/page/customer/register/register-customer";
 import { AuthLogin } from "@/app/page/auth/auth-login";
 import { AuthRegister } from "@/app/page/auth/register/auth-register";
-import { ListUsers } from "@/app/page/auth/list-user/list-user";
 import { UnauthtorizedRoute } from "@/app/page/auth/unauthorized";
 import { ListCustomer } from "@/app/page/customer/list-customer/list-customer";
 import { ShippingList } from "@/app/page/shipping/list-shipping/shipping-list";
 import { ShippingDetail } from "@/app/page/shipping/shipping/shipping-detail-page";
 import { ShippingDashboard } from "@/app/page/shipping/dashboard/shipping-dashboard";
 import { ShippingRegister } from "@/app/page/shipping/register/shipping-register";
+import { ShippingTracking } from "@/app/page/shipping/tracking/shipping-tracking";
+import { ShippingOwnerList } from "@/app/page/shipping/list-shipping/shipping-list-owner";
 
 export const router = createBrowserRouter([
   { path: "/login", Component: AuthLogin },
@@ -28,9 +29,9 @@ export const router = createBrowserRouter([
           //TODOS MIS ROL
           { path: "dashboard", Component: ShippingDashboard },
           { path: "detail/:id", Component: ShippingDetail },
-          { path: "my-shipping", Component: ShippingList },
+          { path: "my-shippings", Component: ShippingOwnerList },
           { path: "reg-shipping", Component: ShippingRegister },
-          
+          { path: "tracking", Component: ShippingTracking },
 
           //OPE Y ADMIN
           {
