@@ -5,7 +5,20 @@ import {
   SHIPPING_STATUS,
 } from "@/features/shipping/constants/status/shipping-status";
 import { useDashboardStats } from "@/features/shipping/hooks/use-dashboard-stats";
-import { Package, Map, AlertTriangle } from "lucide-react";
+import { Map as MapIcon, Radio } from "lucide-react";
+
+import L from "leaflet";
+
+import icon from "leaflet/dist/images/marker-icon.png";
+import iconShadow from "leaflet/dist/images/marker-shadow.png";
+import { VehicleMap } from "@/features/shipping/components/map/vehicle-map";
+let DefaultIcon = L.icon({
+  iconUrl: icon,
+  shadowUrl: iconShadow,
+  iconSize: [25, 41],
+  iconAnchor: [12, 41],
+});
+L.Marker.prototype.options.icon = DefaultIcon;
 
 export function ShippingDashboardPage() {
   const { stats, total, isLoading } = useDashboardStats();
@@ -17,11 +30,10 @@ export function ShippingDashboardPage() {
       <div className="flex justify-between items-end">
         <div>
           <h1 className="text-2xl font-bold text-slate-900">Operaciones</h1>
-          <p className="text-slate-500">Resumen del sistema.</p>
         </div>
         <div className="text-right">
           <p className="text-xs uppercase font-bold text-slate-400">
-            TOTAL DE ENVIOS
+            Total Envíos
           </p>
           <h2 className="text-3xl font-black text-slate-900">{total}</h2>
         </div>
@@ -31,34 +43,38 @@ export function ShippingDashboardPage() {
         {SHIPPING_ORDER.map((key) => {
           const config = SHIPPING_STATUS[key];
           if (!config) return null;
-
           return (
             <StatusStatCard
               key={key}
               label={config.label}
               value={stats[key] || 0}
               style={config.style}
-              onClick={() => console.log(key)}
             />
           );
         })}
       </div>
+
       <div className="grid grid-cols-1 xl:grid-cols-3 gap-6">
-        <div className="xl:col-span-2 bg-slate-900 p-8 rounded-3xl shadow-2xl flex flex-col items-center justify-center min-h-96 relative overflow-hidden">
-          <div className="absolute inset-0 opacity-20 bg-[url('https://upload.wikimedia.org/wikipedia/commons/e/e0/Peru_location_map.svg')] bg-center bg-no-repeat bg-contain" />
-          <div className="relative z-10 text-center">
-            <Map className="w-12 h-12 text-blue-400 mb-4 mx-auto" />
-            <h3 className="text-white font-bold text-lg">Monitoreo de Flota</h3>
-            <div className="mt-6 grid grid-cols-3 gap-4">
-              {[1, 2, 3].map((n) => (
-                <div
-                  key={n}
-                  className="w-20 h-20 rounded-full border border-blue-500/30 flex items-center justify-center animate-pulse text-blue-300 text-[10px]"
-                >
-                  Nodo {n}
-                </div>
-              ))}
+        <div className="xl:col-span-2 bg-slate-900 rounded-3xl shadow-2xl overflow-hidden flex flex-col relative min-h-96">
+          <div className="p-6 flex justify-between items-center z-10">
+            <h3 className="text-white font-bold flex items-center gap-2">
+              <MapIcon className="w-5 h-5 text-blue-400" /> Monitoreo en Tiempo Real
+            </h3>
+            <div className="flex items-center gap-2 px-3 py-1 bg-white/5 rounded-full border border-white/10">
+              <Radio className="w-3 h-3 text-emerald-400 animate-pulse" />
+              <span className="text-emerald-400 text-[10px] font-bold uppercase">
+                Online
+              </span>
             </div>
+          </div>
+
+          <div className="flex-1 w-full h-full z-0">
+            <VehicleMap
+              vehicles={[
+                { id: 1, position: [-16.4, -71.53] },
+                { id: 2, position: [-16.41, -71.55] },
+              ]}
+            />
           </div>
         </div>
 

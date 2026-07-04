@@ -25,7 +25,7 @@ export const Sidebar = ({ onClose }) => {
     }`;
 
   return (
-    <aside className="w-full h-screen bg-[#0f172a] text-slate-300 flex flex-col p-4 shadow-xl select-none">
+    <aside className="w-full h-screen bg-[#0f172a] z-50 text-slate-300 flex flex-col p-4 shadow-xl select-none">
       <h1 className="text-xl font-bold text-white mb-8 px-2 tracking-tight">
         Shipping Service
       </h1>

@@ -13,13 +13,16 @@ export const CreateShippingDrawer = ({ isOpen, onClose, onSuccess }) => {
     watch,
     setValue,
     handleSubmit,
+    reset,
     formState: { errors },
   } = methods;
+
+  console.log(methods);
   const selectedCategories = watch("categoryIds") || [];
 
   useEffect(() => {
     const handleEsc = (e) => {
-      if (e.key === "Escape") onClose();
+      if (e.key === "Escape") handleClose();
     };
     window.addEventListener("keydown", handleEsc);
     return () => window.removeEventListener("keydown", handleEsc);
@@ -39,16 +42,21 @@ export const CreateShippingDrawer = ({ isOpen, onClose, onSuccess }) => {
     onClose();
   };
 
+  const handleClose = () => {
+    reset();
+    onClose();
+  };
+
   return (
     <>
       <div
         className={`fixed inset-0 z-40 bg-black/40 transition-opacity duration-300 ${
           isOpen ? "opacity-100" : "opacity-0 pointer-events-none"
         }`}
-        onClick={onClose}
+        onClick={handleClose}
       />
       <div
-        className={`fixed top-0 right-0 z-50 h-full w-full max-w-lg bg-white shadow-2xl transform transition-transform duration-300 ease-in-out ${
+        className={`fixed top-0 right-0 z-50 h-full w-full max-w-3xl bg-white shadow-2xl transform transition-transform duration-800 ease-in-out ${
           isOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >
@@ -61,7 +69,7 @@ export const CreateShippingDrawer = ({ isOpen, onClose, onSuccess }) => {
               </p>
             </div>
             <button
-              onClick={onClose}
+              onClick={handleClose}
               className="p-2 hover:bg-slate-100 rounded-full transition-colors"
             >
               ✕
@@ -76,10 +84,16 @@ export const CreateShippingDrawer = ({ isOpen, onClose, onSuccess }) => {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <Input label="DNI Remitente" name="dniRemitente" />
                   <Input label="DNI Destinatario" name="dniDestinatario" />
-                  <Input label="Origen" name="originBranch" />
-                  <Input label="Destino" name="destinationBranch" />
-                  <Input label="Peso (kg)" name="weight" />
-                  <Input label="Valor (S/.)" name="declaredValue" />
+                  <div className="md:col-span-2">
+                    <Input label="Origen" name="originBranch" />
+                    <Input label="Destino" name="destinationBranch" />
+                  </div>
+
+                  <div className="md:col-span-1">
+                    <Input label="Peso (kg)" name="weight" />
+                    <Input label="Valor (S/.)" name="declaredValue" />
+                  </div>
+
                   <div className="md:col-span-2">
                     <Input label="Descripción" name="description" />
                   </div>
@@ -120,14 +134,17 @@ export const CreateShippingDrawer = ({ isOpen, onClose, onSuccess }) => {
                     </p>
                   )}
                 </div>
-
-                <div className="pt-4">
-                  <Button type="submit" className="w-full" disabled={isSaving}>
-                    {isSaving ? "Guardando..." : "Registrar Envío"}
-                  </Button>
-                </div>
               </form>
             </FormProvider>
+          </div>
+          <div className="p-6 border-t bg-white">
+            <Button
+              onClick={handleSubmit(handleFormSubmit)}
+              disabled={isSaving}
+              className="w-full"
+            >
+              {isSaving ? "Guardando..." : "Registrar Cliente"}
+            </Button>
           </div>
         </div>
       </div>
