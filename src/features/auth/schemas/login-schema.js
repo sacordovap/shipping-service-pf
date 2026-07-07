@@ -12,7 +12,7 @@ export const registerSchema = z
         /^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#\$%\^&\*/\-_\.]).{8,}$/,
         "Debe incluir mayúsculas, minúsculas, números y un carácter especial",
       ),
-    confirmPassword: z.string().min(8, "Confirma tu contraseña"),
+    confirmPassword: z.string().min(8, "Las contraseñas no coinciden"),
     role: z.enum(["ADMIN", "OPERADOR", "CLIENTE"]),
   })
   .refine((data) => data.password === data.confirmPassword, {

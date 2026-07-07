@@ -40,11 +40,11 @@ export const MENU_ITEMS = [
     icon: Users2Icon,
     roles: ["ADMIN", "OPERADOR"],
     children: [
-      {
-        name: "Registrar Cliente",
-        path: "/shipping/reg-customer",
-        roles: ["ADMIN"],
-      },
+      // {
+      //   name: "Registrar Cliente",
+      //   path: "/shipping/reg-customer",
+      //   roles: ["ADMIN"],
+      // },
       {
         name: "Lista de clientes",
         path: "/shipping/list-customers",

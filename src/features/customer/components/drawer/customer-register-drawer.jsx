@@ -8,7 +8,7 @@ import { useEffect } from "react";
 export const CustomerRegisterDrawer = ({ isOpen, onClose, onSuccess }) => {
   const { methods, fields, append, remove, onSubmit, isSaving } =
     useCustomerForm();
-
+ 
   const {
     register,
     handleSubmit,
@@ -159,7 +159,7 @@ export const CustomerRegisterDrawer = ({ isOpen, onClose, onSuccess }) => {
             </FormProvider>
           </div>
 
-          <div className="p-6 border-t bg-white">
+          <div className="p-6 border-t-2 bg-white">
             <Button
               onClick={handleSubmit(handleFormSubmit)}
               disabled={isSaving}

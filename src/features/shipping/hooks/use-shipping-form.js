@@ -9,6 +9,7 @@ export const useShippingForm = () => {
 
   const methods = useForm({
     resolver: zodResolver(shippingSchema),
+    mode: "onChange",
     defaultValues: { categoryIds: [] },
   });
 
@@ -19,8 +20,11 @@ export const useShippingForm = () => {
       methods.reset();
       alert("¡Envío registrado con éxito!");
     } catch (error) {
-      methods.setError("error", { message: error.message });
-      alert(error.response?.data?.message || "Ocurrió un error");
+      console.log(error);
+      const serverMessage = error?.message || "Ocurrió un error";
+      methods.setError("error", { message: serverMessage });
+      alert(serverMessage);
+      throw error;
     } finally {
       setIsSaving(false);
     }

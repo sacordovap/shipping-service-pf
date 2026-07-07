@@ -28,20 +28,20 @@ export const CustomerListPage = () => {
   if (isLoading)
     return (
       <div className="p-8 text-center text-slate-500 animate-pulse">
-        Cargando gestión de clientes...
+        Cargando listado de clientes...
       </div>
     );
+  if (error)
+    return <div className="p-10 text-center text-rose-500">{error}</div>;
 
   return (
     <div className="max-w-7xl mx-auto p-6 space-y-8">
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
           <h2 className="text-3xl font-extrabold text-slate-900 tracking-tight">
-            Clientes
+            Clientes Registrados
           </h2>
-          <p className="text-slate-500 mt-1">
-            Gestiona y visualiza la base de datos de clientes registrados.
-          </p>
+          
         </div>
 
         <button
@@ -69,6 +69,7 @@ export const CustomerListPage = () => {
                   <div className="w-12 h-12 rounded-full bg-slate-100 flex items-center justify-center font-bold text-slate-600 border border-slate-200">
                     {c.fullName.charAt(0)}
                   </div>
+
                   <div>
                     <p className="font-bold text-slate-900 text-lg">
                       {c.fullName}
@@ -82,9 +83,7 @@ export const CustomerListPage = () => {
                 </div>
 
                 <div className="flex items-center justify-between md:justify-end gap-6">
-                  <StatusCustomer status={c.active} />
-
-                  <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                  <div className="flex items-center gap-1 sm:opacity-0 sm:group-hover:opacity-90 transition-opacity">
                     {role === "ADMIN" && !c.active && (
                       <button
                         onClick={() => handleActivate(c.id)}
@@ -111,6 +110,7 @@ export const CustomerListPage = () => {
                       <UserRoundPen size={20} />
                     </button>
                   </div>
+                  <StatusCustomer status={c.active} />
                 </div>
               </div>
             ))}

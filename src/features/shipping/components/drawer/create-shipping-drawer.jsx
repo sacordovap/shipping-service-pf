@@ -17,9 +17,7 @@ export const CreateShippingDrawer = ({ isOpen, onClose, onSuccess }) => {
     formState: { errors },
   } = methods;
 
-  console.log(methods);
   const selectedCategories = watch("categoryIds") || [];
-
   useEffect(() => {
     const handleEsc = (e) => {
       if (e.key === "Escape") handleClose();
