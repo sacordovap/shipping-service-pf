@@ -28,11 +28,11 @@ export const MENU_ITEMS = [
         path: "/shipping/list-users",
         roles: ["ADMIN"],
       },
-      {
-        name: "Registrar Usuario",
-        path: "/shipping/register",
-        roles: ["ADMIN"],
-      },
+      // {
+      //   name: "Registrar Usuario",
+      //   path: "/shipping/register",
+      //   roles: ["ADMIN"],
+      // },
     ],
   },
   {

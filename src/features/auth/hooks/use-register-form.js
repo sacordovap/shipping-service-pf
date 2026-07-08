@@ -1,9 +1,8 @@
-// features/auth/hooks/use-register-form.js
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { authService } from "@/features/auth/services/auth-service";
-import { registerSchema } from "@/features/auth/schemas/login-schema";
+import { registerSchema } from "@/features/auth/schemas/register-schema";
 
 export const useRegisterForm = () => {
   const [isSaving, setIsSaving] = useState(false);

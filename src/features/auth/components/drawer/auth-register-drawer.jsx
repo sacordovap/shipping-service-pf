@@ -41,7 +41,7 @@ export const AuthRegisterDrawer = ({ isOpen, onClose, onSuccess }) => {
   return (
     <>
       <div
-        className={`fixed inset-0 z-40 bg-black/40 transition-opacity duration-300 ${
+        className={`fixed inset-0 z-40 bg-black/40 transition-opacity duration-800 ${
           isOpen ? "opacity-100" : "opacity-0 pointer-events-none"
         }`}
         onClick={handleClose}
@@ -69,7 +69,7 @@ export const AuthRegisterDrawer = ({ isOpen, onClose, onSuccess }) => {
             </button>
           </div>
 
-          <div className="flex-1 overflow-y-auto p-6">
+          <div className="flex-1 overflow-y-auto p-6 flex flex-col">
             <FormProvider {...methods}>
               <form
                 onSubmit={handleSubmit(handleFormSubmit)}
@@ -145,7 +145,6 @@ export const AuthRegisterDrawer = ({ isOpen, onClose, onSuccess }) => {
             <Button
               onClick={handleSubmit(handleFormSubmit)}
               disabled={isSaving}
-              className="w-full"
             >
               {isSaving ? "Guardando..." : "Registrar Usuario"}
             </Button>

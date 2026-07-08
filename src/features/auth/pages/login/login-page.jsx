@@ -1,57 +1,64 @@
-import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
+import { FormProvider } from "react-hook-form";
+import { useLoginForm } from "@/features/auth/hooks/use-login-form";
 import { Input } from "@/common/components/input/input";
 import { Button } from "@/common/components/button/button";
-import { authService } from "@/features/auth/services/auth-service";
-import { useAuthStore } from "@/features/auth/store/auth-store";
-
+import { AlertCircle } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 export const LoginPage = () => {
+  const navigate = useNavigate();
+  const { methods, onSubmit, isLoading } = useLoginForm();
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
-  const setAuth = useAuthStore((state) => state.setAuth);
-  const navigate = useNavigate();
-
-  const onSubmit = async (formData) => {
+  } = methods;
+  const handleFormSubmit = async (data) => {
     try {
-      const userData = await authService.login(formData);
-      setAuth(userData);
+      await onSubmit(data);
+      console.log("navegando");
       navigate("/shipping/dashboard");
-    } catch (error) {
-      console.error("Error completo:", error);
-      alert("Error al iniciar sesión");
-    }
+    } catch (error) {}
   };
-
   return (
     <div className="min-h-screen flex items-center justify-center bg-slate-50 p-4">
-      <div className="w-full max-w-sm bg-white p-8 rounded-2xl shadow-xl shadow-slate-200/50 border border-slate-100">
-        <h1 className="text-2xl font-bold text-slate-900 mb-2">Bienvenido</h1>
-        <p className="text-slate-500 mb-8 text-sm">
-          Ingresa tus credenciales para continuar.
-        </p>
+      <div className="w-full max-w-md bg-white p-8 rounded-2xl shadow-xl border border-slate-100">
+        <div className="mb-8 text-center">
+          <h1 className="text-2xl font-bold text-slate-900">
+            Bienvenido de nuevo
+          </h1>
+          <p className="text-slate-500">
+            Ingresa tus credenciales para continuar
+          </p>
+        </div>
 
-        <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-5">
-          <Input
-            label="Correo"
-            name="email"
-            register={register}
-            required
-            error={"No se ingreso el correo"}
-          />
-          <Input
-            label="Contraseña"
-            name="password"
-            type="password"
-            register={register}
-            required
-            error={"No se ingreso la contraseña"}
-          />
-          <Button type="submit">Entrar</Button>
-        </form>
+        <FormProvider {...methods}>
+          <form onSubmit={handleSubmit(handleFormSubmit)} className="space-y-4">
+            {errors.error && (
+              <div className="flex items-center gap-2 p-3 bg-rose-50 text-rose-600 text-sm rounded-lg">
+                <AlertCircle size={16} /> {errors.error.message}
+              </div>
+            )}
+
+            <Input
+              label="Email"
+              name="email"
+              register={register}
+              error={errors.email?.message}
+            />
+            <Input
+              label="Contraseña"
+              name="password"
+              type="password"
+              register={register}
+              error={errors.password?.message}
+            />
+
+            <Button type="submit" className="w-full mt-4" disabled={isLoading}>
+              {isLoading ? "Autenticando..." : "Iniciar Sesión"}
+            </Button>
+          </form>
+        </FormProvider>
       </div>
     </div>
   );

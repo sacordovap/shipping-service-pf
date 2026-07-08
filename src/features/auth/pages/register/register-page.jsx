@@ -2,9 +2,9 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Input } from "@/common/components/input/input";
 import { Button } from "@/common/components/button/button";
-import { authService } from "../../services/auth-service";
-import { useAuthStore } from "../../store/auth-store";
-import { registerSchema } from "../../schemas/login-schema";
+import { registerSchema } from "@/features/auth/schemas/register-schema";
+import { authService } from "@/features/auth/services/auth-service";
+import { useAuthStore } from "@/features/auth/store/auth-store";
 
 export const RegisterPage = () => {
   const { role: currentUserRole } = useAuthStore();
