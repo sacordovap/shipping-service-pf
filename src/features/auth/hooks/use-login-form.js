@@ -19,7 +19,7 @@ export const useLoginForm = () => {
       setAuth(userData);
       toast.success("Bienvenido al sistema");
     } catch (err) {
-      const message = err.response?.data?.message || "Credenciales inválidas";
+      const message = err.message || "Credenciales inválidas";
       methods.setError("error", { message });
       toast.error(message);
       throw err;

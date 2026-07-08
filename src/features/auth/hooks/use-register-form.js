@@ -26,7 +26,7 @@ export const useRegisterForm = () => {
       methods.reset();
       alert("¡Envío registrado con éxito!");
     } catch (error) {
-      const serverMessage = error.response?.data?.message || error.message;
+      const serverMessage = error.message || "Información con errores";
       methods.setError("error", { message: serverMessage });
       alert(serverMessage);
 

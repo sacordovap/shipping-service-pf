@@ -1,18 +1,19 @@
 import { api } from "@/common/services/api";
+import { handleApiCall } from "@/common/services/handle-api";
 
 export const authService = {
   login: async (credentials) => {
-    const response = await api.post("/auth/login", credentials);
-    return response.data.data;
+    const data = handleApiCall(api.post("/auth/login", credentials));
+    return data;
   },
 
   register: async (userData) => {
-    const response = await api.post("/auth/register", userData);
-    return response.data.data;
+    const data = handleApiCall(api.post("/auth/register", userData));
+    return data;
   },
 
   getUsers: async () => {
-    const response = await api.get("/auth/users");
-    return response.data.data;
+    const data = handleApiCall(api.get("/auth/users"));
+    return data;
   },
 };
