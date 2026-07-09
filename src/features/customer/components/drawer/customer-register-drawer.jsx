@@ -159,7 +159,7 @@ export const CustomerRegisterDrawer = ({ isOpen, onClose, onSuccess }) => {
             </FormProvider>
           </div>
 
-          <div className="p-6 border-t-2 bg-white">
+          <div className="p-6 bg-white">
             <Button
               onClick={handleSubmit(handleFormSubmit)}
               disabled={isSaving}

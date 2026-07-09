@@ -3,6 +3,7 @@ import { useCustomer } from "@/features/customer/hooks/use-customer";
 import { customerSchema } from "@/features/customer/schemas/customer-schema";
 import { customerService } from "@/features/customer/services/customer-service";
 import { zodResolver } from "@hookform/resolvers/zod";
+import toast from "react-stacked-toast";
 
 export const useCustomerForm = () => {
   const { execute: createCustomer, isLoading: isSaving } = useCustomer(
@@ -30,10 +31,10 @@ export const useCustomerForm = () => {
     try {
       await createCustomer(data);
       methods.reset();
-      alert("¡Cliente registrado con éxito!");
+      toast.success("¡Cliente registrado con éxito!");
     } catch (error) {
       methods.setError("error", { message: error.message });
-      alert(error.message);
+      toast.error(error.message);
     }
   };
 

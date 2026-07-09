@@ -11,7 +11,7 @@ export const CreateShippingDrawer = ({ isOpen, onClose, onSuccess }) => {
 
   const {
     watch,
-    setValue, 
+    setValue,
     handleSubmit,
     reset,
     formState: { errors },
@@ -135,7 +135,7 @@ export const CreateShippingDrawer = ({ isOpen, onClose, onSuccess }) => {
               </form>
             </FormProvider>
           </div>
-          <div className="p-6 border-t bg-white">
+          <div className="p-6 bg-white">
             <Button
               onClick={handleSubmit(handleFormSubmit)}
               disabled={isSaving}

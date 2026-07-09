@@ -76,9 +76,9 @@ export const AuthRegisterDrawer = ({ isOpen, onClose, onSuccess }) => {
                 className="space-y-6"
               >
                 <section className="space-y-4">
-                  <h3 className="flex items-center gap-2 text-[10px] font-bold text-slate-400 uppercase tracking-widest">
-                    <Info size={12} /> Info Básica
-                  </h3>
+                  <div className="flex items-center gap-2 text-[10px] font-bold text-slate-400 uppercase tracking-widest">
+                    <Info size={14} /> Información Básica
+                  </div>
                   <Input
                     label="Nombre Completo"
                     name="nombre"
@@ -101,10 +101,10 @@ export const AuthRegisterDrawer = ({ isOpen, onClose, onSuccess }) => {
                 </section>
 
                 <section className="space-y-4">
-                  <h3 className="flex items-center gap-2 text-[10px] font-bold text-slate-400 uppercase tracking-widest">
-                    <Shield size={12} /> Seguridad
-                  </h3>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="flex items-center gap-2 text-[10px] font-bold text-slate-400 uppercase tracking-widest">
+                    <Shield size={14} /> Seguridad
+                  </div>
+                  <div className="grid grid-cols-2 gap-4">
                     <Input
                       label="Contraseña"
                       name="password"
@@ -122,13 +122,13 @@ export const AuthRegisterDrawer = ({ isOpen, onClose, onSuccess }) => {
                   </div>
 
                   {isAdmin && (
-                    <div className="flex flex-col gap-1">
-                      <label className="text-xs font-bold text-slate-400 uppercase">
+                    <div className="space-y-1.5">
+                      <label className="text-sm font-semibold text-slate-700 ml-0.5">
                         Rol del Sistema
                       </label>
                       <select
                         {...register("role")}
-                        className="w-full p-3 rounded-lg border border-slate-200 bg-transparent focus:ring-2 focus:ring-slate-900 outline-none"
+                        className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/10 outline-none transition-all appearance-none cursor-pointer"
                       >
                         <option value="CLIENTE">Cliente</option>
                         <option value="OPERADOR">Operador</option>
@@ -140,13 +140,13 @@ export const AuthRegisterDrawer = ({ isOpen, onClose, onSuccess }) => {
               </form>
             </FormProvider>
           </div>
-
-          <div className="p-6 border-t-2 bg-white">
+          <div className="p-6 bg-slate-50 border-t border-slate-100 mt-auto">
             <Button
               onClick={handleSubmit(handleFormSubmit)}
-              disabled={isSaving}
+              isLoading={isSaving} // Usamos nuestra nueva prop isLoading del botón mejorado
+              className="w-full h-12 shadow-lg shadow-indigo-500/20"
             >
-              {isSaving ? "Guardando..." : "Registrar Usuario"}
+              Registrar Usuario
             </Button>
           </div>
         </div>

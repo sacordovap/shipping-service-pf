@@ -4,6 +4,7 @@ import { useShippingHistory } from "@/features/shipping/hooks/use-shipping-histo
 import { useUpdateStatus } from "@/features/shipping/hooks/use-update-status";
 import { usePermissions } from "@/hooks/use-pemission";
 import { useState } from "react";
+import toast from "react-stacked-toast";
 
 export const ShippingActions = ({ shipping, onDetailUpdate }) => {
   const { isAdmin, isOperator } = usePermissions();
@@ -21,12 +22,12 @@ export const ShippingActions = ({ shipping, onDetailUpdate }) => {
   const handleConfirmStatus = async (data) => {
     try {
       await updateStatus(data);
-      alert("Estado actualizado exitosamente");
+      toast.success("Estado actualizado exitosamente");
       if (onDetailUpdate) {
         await onDetailUpdate();
       }
     } catch (err) {
-      alert(err.message);
+      toast.error(err.message);
     }
     setActiveModal(null);
   };

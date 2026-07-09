@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { authService } from "@/features/auth/services/auth-service";
 import { registerSchema } from "@/features/auth/schemas/register-schema";
+import toast from "react-stacked-toast";
 
 export const useRegisterForm = () => {
   const [isSaving, setIsSaving] = useState(false);
@@ -24,11 +25,11 @@ export const useRegisterForm = () => {
       const { confirmPassword, ...payload } = data;
       await authService.register(payload);
       methods.reset();
-      alert("¡Envío registrado con éxito!");
+      toast.success("Envío registrado con exito");
     } catch (error) {
       const serverMessage = error.message || "Información con errores";
       methods.setError("error", { message: serverMessage });
-      alert(serverMessage);
+      toast.error(serverMessage);
 
       throw error;
     } finally {

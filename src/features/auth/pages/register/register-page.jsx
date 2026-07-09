@@ -5,6 +5,7 @@ import { Button } from "@/common/components/button/button";
 import { registerSchema } from "@/features/auth/schemas/register-schema";
 import { authService } from "@/features/auth/services/auth-service";
 import { useAuthStore } from "@/features/auth/store/auth-store";
+import toast from "react-stacked-toast";
 
 export const RegisterPage = () => {
   const { role: currentUserRole } = useAuthStore();
@@ -26,10 +27,12 @@ export const RegisterPage = () => {
 
     try {
       await authService.register(dataToSubmit);
-      alert("Usuario registrado con éxito");
+      toast.success("Usuario registrado con exito");
       navigate("/login");
     } catch (error) {
-      alert("Error al registrar: " + (error.message || "Intenta de nuevo"));
+      toast.error(
+        "Error al registrar: " + (error.message || "Intenta de nuevo"),
+      );
     }
   };
 

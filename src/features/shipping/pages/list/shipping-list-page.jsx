@@ -7,7 +7,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 export const ShippingListPage = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const { shippings, isLoading, error, refetch } = useListShippings();
   const navigate = useNavigate();
 
@@ -24,7 +24,7 @@ export const ShippingListPage = () => {
             Envíos Registrados
           </h2>
           <button
-            onClick={() => setIsModalOpen(true)}
+            onClick={() => setIsDrawerOpen(true)}
             className="flex items-center gap-2 bg-slate-900 text-white px-4 py-2.5 rounded-xl font-semibold hover:bg-slate-800 transition-all shadow-sm hover:shadow-md active:scale-95"
           >
             <Plus className="w-5 h-5" />
@@ -67,11 +67,11 @@ export const ShippingListPage = () => {
       </div>
 
       <CreateShippingDrawer
-        isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
+        isOpen={isDrawerOpen}
+        onClose={() => setIsDrawerOpen(false)}
         onSuccess={() => {
           refetch();
-          setIsModalOpen(false);
+          setIsDrawerOpen(false);
         }}
       />
     </>

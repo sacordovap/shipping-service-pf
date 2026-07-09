@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { shippingSchema } from "@/features/shipping/schema/shipping-schema";
 import { shippingService } from "@/features/shipping/services/shipping-service";
+import toast from "react-stacked-toast";
 
 export const useShippingForm = () => {
   const [isSaving, setIsSaving] = useState(false);
@@ -18,12 +19,12 @@ export const useShippingForm = () => {
     try {
       await shippingService.create(data);
       methods.reset();
-      alert("¡Envío registrado con éxito!");
+      toast.success("¡Envío registrado con éxito!");
     } catch (error) {
       console.log(error);
       const serverMessage = error?.message || "Ocurrió un error";
       methods.setError("error", { message: serverMessage });
-      alert(serverMessage);
+      toast.error(serverMessage);
       throw error;
     } finally {
       setIsSaving(false);
