@@ -109,21 +109,31 @@ export const CreateShippingDrawer = ({ isOpen, onClose, onSuccess }) => {
                     <div className="text-sm text-rose-500">{error}</div>
                   ) : (
                     <div className="flex flex-wrap gap-2">
-                      {categories.map((cat) => (
-                        <button
-                          key={cat.id}
-                          type="button"
-                          title={cat.description}
-                          onClick={() => toggleCategory(cat.id)}
-                          className={`px-3 py-1.5 rounded-full text-xs font-medium border transition-all ${
-                            selectedCategories.includes(cat.id)
-                              ? "bg-blue-600 border-blue-600 text-white"
-                              : "bg-white border-slate-300 text-slate-600 hover:border-blue-400"
-                          }`}
-                        >
-                          {cat.name}
-                        </button>
-                      ))}
+                      {categories.map((cat) => {
+                        const isSelected = selectedCategories.includes(cat.id);
+
+                        return (
+                          <button
+                            key={cat.id}
+                            type="button"
+                            onClick={() => toggleCategory(cat.id)}
+                            className={`
+          group flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium border transition-all duration-300
+          ${
+            isSelected
+              ? "bg-slate-900 border-slate-900 text-white shadow-lg shadow-slate-900/20 scale-105"
+              : "bg-white border-slate-200 text-slate-600 hover:border-slate-300 hover:text-slate-900 hover:bg-slate-50"
+          }
+        `}
+                          >
+                            {/* Indicador sutil de selección */}
+                            <span
+                              className={`w-1.5 h-1.5 rounded-full transition-colors ${isSelected ? "bg-white" : "bg-slate-300"}`}
+                            />
+                            {cat.name}
+                          </button>
+                        );
+                      })}
                     </div>
                   )}
                   {errors.categoryIds && (

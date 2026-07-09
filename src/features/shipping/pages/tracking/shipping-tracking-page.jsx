@@ -10,6 +10,12 @@ import { useState } from "react";
 export const ShippingTrackingPage = () => {
   const [code, setCode] = useState("");
   const { getTracking, data, isLoading, error } = useTracking();
+  const isButtonDisabled = !code.trim() || isLoading;
+  const handleSearch = () => {
+    if (code.trim()) {
+      getTracking(code);
+    }
+  };
 
   return (
     <div className="max-w-5xl mx-auto p-4 md:p-8 lg:p-12">
@@ -23,16 +29,17 @@ export const ShippingTrackingPage = () => {
 
         <div className="flex gap-2">
           <input
-            className="flex-1 px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-blue-600 outline-none transition-all"
-            placeholder="Ej. TRK-2AF34D80"
+            required
+            type="text"
+            className="flex-1 px-4 py-3 rounded-xl border border-slate-200 focus:ring-4 focus:ring-slate-900/10 focus:border-slate-900 outline-none transition-all"
+            placeholder="Ej. TRK-999..."
             value={code}
             onChange={(e) => setCode(e.target.value)}
+            onKeyDown={(e) =>
+              e.key === "Enter" && !isButtonDisabled && handleSearch()
+            }
           />
-          <Button
-            onClick={() => getTracking(code)}
-            disabled={isLoading}
-            className="px-6"
-          >
+          <Button onClick={handleSearch} disabled={isLoading} className="px-6">
             {isLoading ? "Buscando..." : <Search className="w-5 h-5" />}
           </Button>
         </div>

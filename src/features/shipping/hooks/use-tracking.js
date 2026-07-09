@@ -1,6 +1,7 @@
 import { shippingService } from "@/features/shipping/services/shipping-service";
 import { mapShippingToList } from "@/features/shipping/utils/mapper/shipping-mapper";
 import { useState } from "react";
+import toast from "react-stacked-toast";
 
 export const useTracking = () => {
   const [data, setData] = useState(null);
@@ -15,9 +16,11 @@ export const useTracking = () => {
       const response = await shippingService.searchByTracking(trackingNumber);
       console.log(response);
       setData(response);
+      toast.success("Envío encontrado");
     //   setData(mapShippingToList(response));
     } catch (err) {
-      setError(err.message);
+      console.log(err);
+      setError(err?.message);
     } finally {
       setIsLoading(false);
     }
