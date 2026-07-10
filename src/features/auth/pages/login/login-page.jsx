@@ -43,15 +43,11 @@ export const LoginPage = () => {
             <Input
               label="Email"
               name="email"
-              register={register}
-              error={errors.email?.message}
             />
             <Input
               label="Contraseña"
               name="password"
               type="password"
-              register={register}
-              error={errors.password?.message}
             />
 
             <Button type="submit" className="w-full mt-4" disabled={isLoading}>
