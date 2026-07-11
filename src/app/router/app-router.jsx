@@ -13,6 +13,7 @@ import { ShippingDashboard } from "@/app/page/shipping/dashboard/shipping-dashbo
 import { ShippingRegister } from "@/app/page/shipping/register/shipping-register";
 import { ShippingTracking } from "@/app/page/shipping/tracking/shipping-tracking";
 import { ShippingOwnerList } from "@/app/page/shipping/list-shipping/shipping-list-owner";
+import { ShippingPaged } from "@/app/page/shipping/list-shipping/shipping-paged";
 
 export const router = createBrowserRouter([
   { path: "/login", Component: AuthLogin },
@@ -40,6 +41,7 @@ export const router = createBrowserRouter([
               { path: "reg-customer", Component: RegisterCustomer },
               { path: "list-customers", Component: ListCustomer },
               { path: "shipping-list", Component: ShippingList },
+              { path: "shipping-paged", Component: ShippingPaged },
             ],
           },
 

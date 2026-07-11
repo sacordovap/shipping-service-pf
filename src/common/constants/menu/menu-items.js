@@ -68,7 +68,12 @@ export const MENU_ITEMS = [
         roles: ["ADMIN", "OPERADOR"],
       },
       {
-        name: "Lista de Envios",
+        name: "Envíos realizados",
+        path: "/shipping/shipping-paged",
+        roles: ["ADMIN", "OPERADOR"],
+      },
+      {
+        name: "Todos los envíos",
         path: "/shipping/shipping-list",
         roles: ["ADMIN", "OPERADOR"],
       },
