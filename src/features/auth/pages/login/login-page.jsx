@@ -4,9 +4,11 @@ import { Input } from "@/common/components/input/input";
 import { Button } from "@/common/components/button/button";
 import { AlertCircle } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { usePermissions } from "@/hooks/use-pemission";
 
 export const LoginPage = () => {
   const navigate = useNavigate();
+  const { isAdmin, isOperator } = usePermissions();
   const { methods, onSubmit, isLoading } = useLoginForm();
   const {
     register,
@@ -16,7 +18,7 @@ export const LoginPage = () => {
   const handleFormSubmit = async (data) => {
     try {
       await onSubmit(data);
-      navigate("/shipping/dashboard");
+      navigate("/auth-redirect");
     } catch (error) {}
   };
   return (
@@ -39,15 +41,8 @@ export const LoginPage = () => {
               </div>
             )}
 
-            <Input
-              label="Correo"
-              name="email"
-            />
-            <Input
-              label="Contraseña"
-              name="password"
-              type="password"
-            />
+            <Input label="Correo" name="email" />
+            <Input label="Contraseña" name="password" type="password" />
 
             <Button type="submit" className="w-full mt-4" disabled={isLoading}>
               {isLoading ? "Autenticando..." : "Iniciar Sesión"}

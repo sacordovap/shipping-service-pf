@@ -150,7 +150,7 @@ export const CreateShippingDrawer = ({ isOpen, onClose, onSuccess }) => {
               disabled={isSaving}
               className="w-full"
             >
-              {isSaving ? "Guardando..." : "Registrar Cliente"}
+              {isSaving ? "Guardando..." : "Registrar Envío"}
             </Button>
           </div>
         </div>

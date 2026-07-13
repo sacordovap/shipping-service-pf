@@ -15,10 +15,12 @@ import { ShippingTracking } from "@/app/page/shipping/tracking/shipping-tracking
 import { ShippingOwnerList } from "@/app/page/shipping/list-shipping/shipping-list-owner";
 import { ShippingPaged } from "@/app/page/shipping/list-shipping/shipping-paged";
 import { LandingPage } from "@/app/page/landing/landing-page";
+import { Redirect } from "@/app/page/auth/redirect/redirect";
 
 export const router = createBrowserRouter([
   { path: "/", Component: LandingPage },
   { path: "/login", Component: AuthLogin },
+  { path: "/auth-redirect", Component: Redirect },
   { path: "/register", Component: AuthRegister },
   { path: "/unauthorized", Component: UnauthtorizedRoute },
   { path: "/tracking", Component: ShippingTracking },
