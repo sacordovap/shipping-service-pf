@@ -47,7 +47,7 @@ src/
 ## Lógica de Permisos
 El sistema protege las rutas críticas utilizando un componente ProtectedRoute y filtra el contenido basado en roles:
 * **ADMIN:** Acceso total, gestión de usuarios, gestión de cliente y gestión de envíos.
-* **OPERATOR:** Gestión operativa, seguimiento, gestión de envíos y gestión de clientes.
+* **OPERADOR:** Gestión operativa, seguimiento, gestión de envíos y gestión de clientes.
 * **CLIENTE:** Acceso restringido únicamente a su panel de seguimiento.
 
 ## Decisiones Técnicas
