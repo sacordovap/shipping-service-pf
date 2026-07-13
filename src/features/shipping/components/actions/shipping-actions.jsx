@@ -23,7 +23,7 @@ export const ShippingActions = ({ shipping, onDetailUpdate }) => {
     if (!success) {
       setActiveModal(null);
       return;
-    }    
+    }
     if (onDetailUpdate) {
       await onDetailUpdate();
     }
@@ -45,16 +45,17 @@ export const ShippingActions = ({ shipping, onDetailUpdate }) => {
           </button>
         )} */}
 
-        {(isAdmin || isOperator) && shipping.status !== "ENTREGADO" && (
-          <button
-            onClick={() => setActiveModal("status")}
-            className="w-full bg-sky-600 text-white py-2 rounded-lg hover:bg-sky-700"
-          >
-            Cambiar Estado
-          </button>
-        )}
+        {(isAdmin || isOperator) &&
+          !["ENTREGADO", "ELIMINADO"].includes(shipping.status) && (
+            <button
+              onClick={() => setActiveModal("status")}
+              className="w-full bg-sky-600 text-white py-2 rounded-lg hover:bg-sky-700"
+            >
+              Cambiar Estado
+            </button>
+          )}
 
-        {isAdmin && (
+        {(isAdmin || isOperator) && (
           <button
             onClick={handleOpenHistory}
             className="w-full text-slate-600 border py-2 rounded-lg hover:bg-slate-50"

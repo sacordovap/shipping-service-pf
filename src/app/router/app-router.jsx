@@ -31,7 +31,7 @@ export const router = createBrowserRouter([
         element: <MainLayout />,
         children: [
           //TODOS MIS ROL
-          { path: "dashboard", Component: ShippingDashboard },
+
           { path: "detail/:id", Component: ShippingDetail },
           { path: "my-shippings", Component: ShippingOwnerList },
           { path: "reg-shipping", Component: ShippingRegister },
@@ -41,6 +41,7 @@ export const router = createBrowserRouter([
           {
             element: <ProtectedRoute allowedRoles={["ADMIN", "OPERADOR"]} />,
             children: [
+              { path: "dashboard", Component: ShippingDashboard },
               { path: "reg-customer", Component: RegisterCustomer },
               { path: "list-customers", Component: ListCustomer },
               { path: "shipping-list", Component: ShippingList },

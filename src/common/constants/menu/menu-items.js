@@ -8,12 +8,6 @@ import {
 
 export const MENU_ITEMS = [
   {
-    name: "Dashboard",
-    path: "/shipping/dashboard",
-    icon: LayoutDashboardIcon,
-    roles: ["ADMIN", "OPERADOR", "CLIENTE"],
-  },
-  {
     name: "Tracking",
     path: "/shipping/tracking",
     icon: PackageSearch,
@@ -46,6 +40,12 @@ export const MENU_ITEMS = [
       //   path: "/shipping/reg-customer",
       //   roles: ["ADMIN"],
       // },
+      {
+        name: "Dashboard",
+        path: "/shipping/dashboard",
+        icon: LayoutDashboardIcon,
+        roles: ["ADMIN", "OPERADOR", "CLIENTE"],
+      },
       {
         name: "Lista de clientes",
         path: "/shipping/list-customers",

@@ -2,13 +2,19 @@ import {
   ALLOWED_TRANSITIONS,
   SHIPPING_STATUS,
 } from "@/features/shipping/constants/status/shipping-status";
+import { usePermissions } from "@/hooks/use-pemission";
 import { useForm } from "react-hook-form";
 
 export const StatusModal = ({ isOpen, onClose, onConfirm, currentStatus }) => {
+  const { isAdmin, isOperator } = usePermissions();
   const { register, handleSubmit } = useForm();
   const validNextStates = ALLOWED_TRANSITIONS[currentStatus] || [];
 
   if (!isOpen || !currentStatus) return null;
+
+  const filteredStates = isAdmin
+    ? validNextStates
+    : validNextStates.filter((state) => state !== "ELIMINADO");
 
   const handleFormSubmit = async (data) => {
     await onConfirm(data);
@@ -44,14 +50,14 @@ export const StatusModal = ({ isOpen, onClose, onConfirm, currentStatus }) => {
               <option value="" className="text-sm font-bold">
                 Seleccione el nuevo estado...
               </option>
-              {validNextStates.map((state) => (
+              {filteredStates.map((state) => (
                 <option
                   key={state}
                   value={state}
                   className={
                     state === "ELIMINADO"
-                      ? "text-sm text-rose-300 font-bold"
-                      : "text-sm font-bold"
+                      ? "text-sm text-rose-600 font-bold"
+                      : "text-sm font-bold text-slate-700"
                   }
                 >
                   {state === "ELIMINADO"
