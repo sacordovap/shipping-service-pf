@@ -4,11 +4,6 @@ import { Input } from "@/common/components/input/input";
 import { Button } from "@/common/components/button/button";
 import { useCategories } from "@/features/shipping/hooks/use-categories";
 
-// const categories = [
-//   { id: "46a49012-feea-4095-9c22-d2b2b19923b1", name: "Electrónicos" },
-//   { id: "b2a49012-feea-4095-9c22-d2b2b19923b2", name: "Documentos" },
-// ];
-
 export const RegisterShippingPage = () => {
   const { categories, isLoading, error } = useCategories();
   const { methods, onSubmit, isSaving } = useShippingForm();

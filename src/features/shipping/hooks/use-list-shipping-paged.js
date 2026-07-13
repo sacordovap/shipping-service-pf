@@ -1,53 +1,86 @@
 import { shippingService } from "@/features/shipping/services/shipping-service";
 import { mapShippingList } from "@/features/shipping/utils/mapper/shipping-mapper";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useState, useMemo } from "react";
+import { useSearchParams } from "react-router-dom";
 
 export const useListShippingsPaged = () => {
-  const [data, setData] = useState({
-    content: [],
-    totalPages: 0,
-    pageNumber: 1,
-  });
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [data, setData] = useState({ content: [], totalPages: 0 });
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [currentPage, setCurrentPage] = useState(1);
 
-  const fetchShippings = useCallback(async (page) => {
-    console.log("parte1");
+  const filters = useMemo(() => {
+    const p = parseInt(searchParams.get("page") || "1");
+    return {
+      page: isNaN(p) || p < 1 ? 1 : p,
+      branch: searchParams.get("branch") || "",
+      state: searchParams.get("state") || "",
+      category: searchParams.get("category") || "",
+      term: searchParams.get("term") || "",
+      name: searchParams.get("name") || "",
+    };
+  }, [searchParams]);
+
+  const fetchShippings = useCallback(async () => {
     setIsLoading(true);
+    setError(null);
     try {
-      console.log("parte2");
-      const response = await shippingService.getAllPaged(page, 12);
-      console.log("parte3");
+      const queryParams = {
+        page: filters.page, 
+        size: 12,
+        ...(filters.branch && { branch: filters.branch }),
+        ...(filters.state && { state: filters.state }),
+        ...(filters.category && { category: filters.category }),
+        ...(filters.term && { term: filters.term }),
+        ...(filters.name && { name: filters.name }),
+      };
+
+      const response = await shippingService.searchFiltered(queryParams);
+
       setData({
-        content: mapShippingList(response.content),
-        totalPages: response.totalPages,
-        pageNumber: response.pageNumber,
+        content: mapShippingList(response?.content || []),
+        totalPages: response?.totalPages || 0,
       });
     } catch (err) {
       setError(err.message);
+      setData({ content: [], totalPages: 0 });
     } finally {
       setIsLoading(false);
     }
-  }, []);
+  }, [filters]);
 
   useEffect(() => {
-    fetchShippings(currentPage);
-  }, [fetchShippings, currentPage]);
+    fetchShippings();
+  }, [fetchShippings]);
 
-  const refetch = useCallback(
-    (page = currentPage) => {
-      fetchShippings(page);
-    },
-    [fetchShippings, currentPage],
-  );
+  const setFilters = (newFilters) => {
+    const params = new URLSearchParams(searchParams);
+
+    Object.entries(newFilters).forEach(([key, value]) => {
+      if (value !== null && value !== undefined && value !== "") {
+        params.set(key, value);
+      } else {
+        params.delete(key);
+      }
+    });
+
+    if (!newFilters.hasOwnProperty("page")) {
+      params.set("page", "1");
+    }
+
+    setSearchParams(params, { replace: true });
+  };
+
   return {
     shippings: data.content,
     totalPages: data.totalPages,
-    currentPage,
-    setCurrentPage,
+    currentPage: filters.page,
+    setCurrentPage: (p) =>
+      setFilters({ page: typeof p === "function" ? p(filters.page) : p }),
     isLoading,
     error,
-    refetch,
+    filters,
+    setFilters,
+    refetch: fetchShippings,
   };
 };

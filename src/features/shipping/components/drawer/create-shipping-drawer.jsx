@@ -126,7 +126,6 @@ export const CreateShippingDrawer = ({ isOpen, onClose, onSuccess }) => {
           }
         `}
                           >
-                            {/* Indicador sutil de selección */}
                             <span
                               className={`w-1.5 h-1.5 rounded-full transition-colors ${isSelected ? "bg-white" : "bg-slate-300"}`}
                             />

@@ -1,5 +1,6 @@
 import { shippingService } from "@/features/shipping/services/shipping-service";
 import { useState } from "react";
+import toast from "react-stacked-toast";
 
 export const useUpdateStatus = (shippingId) => {
   const [isUpdating, setIsUpdating] = useState(false);
@@ -7,11 +8,22 @@ export const useUpdateStatus = (shippingId) => {
 
   const updateStatus = async (data, onSuccess) => {
     setIsUpdating(true);
+    setError(null);
     try {
-      await shippingService.updateState(shippingId, data.newState);
+      if (data.newState === "ELIMINADO") {
+        await shippingService.delete(shippingId);
+      } else {
+        await shippingService.updateState(shippingId, data.newState);
+      }
+
       onSuccess?.();
+      toast.success("Estado actualizado exitosamente");
+      return true;
     } catch (error) {
-      setError(err.message);
+      console.log(error.message);
+      setError(error.message);
+      toast.error(error.message);
+      return false;
     } finally {
       setIsUpdating(false);
     }

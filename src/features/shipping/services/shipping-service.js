@@ -13,12 +13,19 @@ export const shippingService = {
   getAll: async () => handleApiCall(api.get("/shippings")),
   // const response = await api.get();
 
-   //TODOS LOS ENVIOS PAGINADO
-  getAllPaged: async (page, size) => handleApiCall(api.get(`/shippings/paged?page=${page}&size=${size}`)),
+  //TODOS LOS ENVIOS PAGINADO
+  getAllPaged: async (page, size) =>
+    handleApiCall(api.get(`/shippings/paged?page=${page}&size=${size}`)),
 
   getAllOwner: async () => handleApiCall(api.get("/shippings/my-shippings")),
   // const response = await api.get();
 
+
+  //multiple filters 
+  searchFiltered: (filters) => {
+    const params = new URLSearchParams(filters).toString();
+    return handleApiCall(api.get(`/shippings/filter/search?${params}`));
+  },
 
   // Listado filtrado (CATEGORY + STATE)
   getByCategoryAndState: (category, state) =>

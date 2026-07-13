@@ -41,10 +41,22 @@ export const StatusModal = ({ isOpen, onClose, onConfirm, currentStatus }) => {
               {...register("newState", { required: true })}
               className="w-full p-3 border border-slate-200 rounded-xl focus:ring-2 focus:ring-sky-500 outline-none"
             >
-              <option value="">Seleccione el nuevo estado...</option>
+              <option value="" className="text-sm font-bold">
+                Seleccione el nuevo estado...
+              </option>
               {validNextStates.map((state) => (
-                <option key={state} value={state}>
-                  {SHIPPING_STATUS[state].label}
+                <option
+                  key={state}
+                  value={state}
+                  className={
+                    state === "ELIMINADO"
+                      ? "text-sm text-rose-300 font-bold"
+                      : "text-sm font-bold"
+                  }
+                >
+                  {state === "ELIMINADO"
+                    ? "⚠️ Eliminar envío"
+                    : SHIPPING_STATUS[state].label}
                 </option>
               ))}
             </select>
