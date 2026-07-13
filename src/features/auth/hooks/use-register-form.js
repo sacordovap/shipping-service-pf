@@ -25,7 +25,7 @@ export const useRegisterForm = () => {
       const { confirmPassword, ...payload } = data;
       await authService.register(payload);
       methods.reset();
-      toast.success("Envío registrado con exito");
+      toast.success("Usuario registrado");
     } catch (error) {
       const serverMessage = error.message || "Información con errores";
       methods.setError("error", { message: serverMessage });

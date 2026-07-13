@@ -4,7 +4,7 @@ import { useAuthStore } from "@/features/auth/store/auth-store";
 export const ProtectedRoute = ({ allowedRoles }) => {
   const { isAuthenticated, role } = useAuthStore();
   
-  if (!isAuthenticated) return <Navigate to="/login" />;
+  if (!isAuthenticated) return <Navigate to="/" />;
 
   if (allowedRoles && !allowedRoles.includes(role)) {
     return <Navigate to="/unauthorized" replace />;

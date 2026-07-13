@@ -14,11 +14,14 @@ import { ShippingRegister } from "@/app/page/shipping/register/shipping-register
 import { ShippingTracking } from "@/app/page/shipping/tracking/shipping-tracking";
 import { ShippingOwnerList } from "@/app/page/shipping/list-shipping/shipping-list-owner";
 import { ShippingPaged } from "@/app/page/shipping/list-shipping/shipping-paged";
+import { LandingPage } from "@/app/page/landing/landing-page";
 
 export const router = createBrowserRouter([
+  { path: "/", Component: LandingPage },
   { path: "/login", Component: AuthLogin },
   { path: "/register", Component: AuthRegister },
   { path: "/unauthorized", Component: UnauthtorizedRoute },
+  { path: "/tracking", Component: ShippingTracking },
 
   {
     path: "/shipping",

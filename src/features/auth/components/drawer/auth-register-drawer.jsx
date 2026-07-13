@@ -143,7 +143,7 @@ export const AuthRegisterDrawer = ({ isOpen, onClose, onSuccess }) => {
           <div className="p-6 bg-slate-50 border-t border-slate-100 mt-auto">
             <Button
               onClick={handleSubmit(handleFormSubmit)}
-              isLoading={isSaving} // Usamos nuestra nueva prop isLoading del botón mejorado
+              isLoading={isSaving}
               className="w-full h-12 shadow-lg shadow-indigo-500/20"
             >
               Registrar Usuario

@@ -3,7 +3,7 @@ import * as z from "zod";
 export const loginSchema = z.object({
   email: z
     .string()
-    .min(1, "El correo es obligatorio")
+    .min(1, "Debe ingresar su correo electrónico")
     .email("Correo electrónico inválido"),
-  password: z.string().min(1, "La contraseña es obligatoria"),
+  password: z.string().min(1, "Debe ingresar su contrase;a"),
 });

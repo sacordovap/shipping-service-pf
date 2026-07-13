@@ -16,7 +16,6 @@ export const LoginPage = () => {
   const handleFormSubmit = async (data) => {
     try {
       await onSubmit(data);
-      console.log("navegando");
       navigate("/shipping/dashboard");
     } catch (error) {}
   };
@@ -41,7 +40,7 @@ export const LoginPage = () => {
             )}
 
             <Input
-              label="Email"
+              label="Correo"
               name="email"
             />
             <Input

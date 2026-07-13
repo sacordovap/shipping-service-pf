@@ -3,6 +3,7 @@ import {
   Users2Icon,
   Package2,
   UserCheck,
+  PackageSearch,
 } from "lucide-react";
 
 export const MENU_ITEMS = [
@@ -15,7 +16,7 @@ export const MENU_ITEMS = [
   {
     name: "Tracking",
     path: "/shipping/tracking",
-    icon: LayoutDashboardIcon,
+    icon: PackageSearch,
     roles: ["ADMIN", "OPERADOR", "CLIENTE"],
   },
   {
@@ -72,11 +73,11 @@ export const MENU_ITEMS = [
         path: "/shipping/shipping-paged",
         roles: ["ADMIN", "OPERADOR"],
       },
-      {
-        name: "Todos los envíos",
-        path: "/shipping/shipping-list",
-        roles: ["ADMIN", "OPERADOR"],
-      },
+      // {
+      //   name: "Todos los envíos",
+      //   path: "/shipping/shipping-list",
+      //   roles: ["ADMIN", "OPERADOR"],
+      // },
     ],
   },
 ];

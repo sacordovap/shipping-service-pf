@@ -17,11 +17,11 @@ export const SessionChecker = ({ children }) => {
 
         if (isExpired) {
           logout();
-          window.location.href = "/login";
+          window.location.href = "/";
         }
       } catch (error) {
         logout();
-        window.location.href = "/login";
+        window.location.href = "/";
       }
     };
 

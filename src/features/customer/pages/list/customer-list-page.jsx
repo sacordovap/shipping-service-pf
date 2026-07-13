@@ -17,6 +17,7 @@ export const CustomerListPage = () => {
     handleEdit,
     handleActivate,
     handleDelete,
+    fetchCustomers
   } = useListCustomers();
   const { role } = useAuthStore();
 
@@ -134,6 +135,7 @@ export const CustomerListPage = () => {
         isOpen={isDrawerOpen}
         onClose={() => setIsDrawerOpen(false)}
         onSuccess={() => {
+          fetchCustomers();
           setIsDrawerOpen(false);
         }}
       />

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useFormContext } from "react-hook-form";
-import { Eye, EyeOff } from "lucide-react"; // Asegúrate de instalarlos
+import { Eye, EyeOff } from "lucide-react";
 
 export const Input = ({ label, name, error, register, ...props }) => {
   const [showPassword, setShowPassword] = useState(false);

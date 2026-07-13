@@ -24,7 +24,7 @@ export const ShippingTrackingPage = () => {
           Rastrea tu envío
         </h1>
         <p className="text-slate-500 mb-6 text-sm">
-          Ingresa tu número de guía para obtener el estado en tiempo real.
+          Ingresa tu número de seguimiento para obtener el estado en tiempo real.
         </p>
 
         <div className="flex gap-2">
